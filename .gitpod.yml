@@ -2,4 +2,4 @@ ports:
 - port: 8050
   onOpen: open-preview
 tasks:
-- init: /workspace/gitpod-dash/run.sh
+- init: /workspace/data1050_gitpod_dash_app/run.sh
