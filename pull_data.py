@@ -6,13 +6,26 @@ import pandas as pd
 
 
 URL = "https://api.covidactnow.org/v2/states.csv?apiKey=bd3dfdfc355042c0996d60494588c092"
-response = requests.get(URL)
-decoded_content = response.content.decode('utf-8')
-cr = csv.reader(decoded_content.splitlines(), delimiter=',')
-my_list = list(cr)
-df = pd.DataFrame(my_list)
-df.to_csv("data.csv", index = False, header=False)
-print(df)
+historical = "https://api.covidactnow.org/v2/states.timeseries.csv?apiKey=bd3dfdfc355042c0996d60494588c092"
+def pull_data(URL):
+    response = requests.get(URL)
+    decoded_content = response.content.decode('utf-8')
+    cr = csv.reader(decoded_content.splitlines(), delimiter=',')
+    my_list = list(cr)
+    df = pd.DataFrame(my_list)
+    new_header = df.iloc[0] #grab the first row for the header
+    df = df[1:] #take the data less the header row
+    df.columns = new_header
+    df = df.reset_index(drop = True)
+    file_name = "historical.csv"
+    if "lastUpdatedDate" in df.columns:
+        file_name = str(df["lastUpdatedDate"][0])+".csv"
+    df.to_csv(file_name, index = False, header=False)
+    return df
+
+df = pull_data(URL)
+#print(str(df["lastUpdatedDate"][0])+".csv")
+
 
 
 """    
