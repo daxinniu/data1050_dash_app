@@ -75,7 +75,7 @@ def clean_data(historical_data):
     historical_data.iloc[:, 4:] = temp
     return historical_data
 
-
+##
 # """    
 # with requests.Session() as s:
 #     download = s.get(URL)
