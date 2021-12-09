@@ -38,6 +38,7 @@ by_state_graph_layout = html.Div([
         multi=False,
         value="RI"
     ),
+    html.Br(),
     html.H4("option"),
     dcc.Dropdown(
         id="option2",

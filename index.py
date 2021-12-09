@@ -30,6 +30,7 @@ app_tabs = html.Div(
 )
 
 app.layout = dbc.Container([
+    html.Br(),
     dbc.Row(dbc.Col(html.H1("Covid Data Analysis Dashboard",
                             style={"textAlign": "center"}), width=12)),
     html.Hr(),
