@@ -11,23 +11,22 @@ import pandas as pd
 import numpy as np
 from app import app, historical_data
 
-Cases = ['Date', 'Number of Cases', 'Number of Deaths',
-        'Number of Positive Tests', 'Number of Negative Tests',
-        'Contact Tracers']
-Vaccines = ['Date','Vaccines Distributed', 'Vaccinations Initiated',
-       'Vaccinations Completed']
-Hospitalization = ['Date','Hhospital Beds Capacity',
+Cases = np.sort(['Date', 'Number of Cases', 'Number of Deaths',
+        'Number of Positive Tests', 'Number of New Cases',
+        'Number of New Deaths'])
+Vaccines = np.sort(['Date','Number of Vaccines Distributed', 'Number of Vaccinations Initiated',
+       'Number of Vaccinations Completed', 'Number of Vaccines Administered'])
+Hospitalization = np.sort(['Date','Hospital Beds Capacity',
         'Hospital Beds Current Usage Total',
        'Hospital Beds Current Usage Covid', 
        'ICU Beds Capacity', 'ICU Beds Current Usage Total',
-       'ICU Beds Current Usage Covid']
-Metrices = ['Date','Test Positivity Ratio',
-        'Case Density',
+       'ICU Beds Current Usage Covid'])
+Metrices = np.sort(['Date','Test Positivity Ratio','Test Positivity Ratio',
        'Contact Tracer Capacity Ratio', 'Infection Rate',
        'Infection Rate CI90', 
-       'ICU Capacity Ratio', 'Risk Levels Overall',
+       'ICU Capacity Ratio', 
        'Vaccinations Initiated Ratio',
-       'Vaccinations Completed Ratio']
+       'Vaccinations Completed Ratio'])
 
 
 by_state_graph_layout = html.Div([
@@ -39,13 +38,13 @@ by_state_graph_layout = html.Div([
         value="RI"
     ),
     html.Br(),
-    html.H4("option"),
+    html.H4("Metric Category"),
     dcc.Dropdown(
         id="option2",
         options=[{'label': "Cases", 'value': 'Cases'},
-                 {'label': "Vaccines", 'value': 'Vaccines'},
                  {'label': 'Hospitalization', 'value': 'Hospitalization'},
-                 {'label': 'Metrices', 'value': 'Metrices'} ],
+                 {'label': 'Metrices', 'value': 'Metrices'},
+                 {'label': "Vaccination", 'value': 'Vaccines'} ],
         multi=False,
         value= 'Cases'
     ),
@@ -76,7 +75,8 @@ def update_graph(state_val, option_val):
 
 
     melt_n = pd.melt(temp_df, id_vars = "Date")
-    melt_n.columns = ['date','option','value']
-    fig = px.line(melt_n, x='date', y='value', color='option', title = f"Overview of {option_val} in {state_val}") #
+    melt_n.columns = ['Date','option','value']
+    fig = px.line(melt_n, x='Date', y='value', color='option', title = f"Overview of {option_val} in {state_val}" ,
+    labels=dict(value="", option="")) 
     
     return [go.Figure(data=fig)]
