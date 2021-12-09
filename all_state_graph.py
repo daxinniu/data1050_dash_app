@@ -13,10 +13,10 @@ import numpy as np
 from app import app, historical_data
 
 all_state_graph_layout = html.Div([
-    html.H4("Option"),
+    html.H4("Select"),
     dcc.Dropdown(
         id="option1",
-        options=[{'label': i, 'value': i} for i in historical_data.columns[4:] ],
+        options=[{'label': i, 'value': i} for i in np.sort(historical_data.columns[4:]) ],
         multi=False,
         value="Number of Cases"
     ),
