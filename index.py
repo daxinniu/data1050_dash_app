@@ -9,6 +9,7 @@ from app import app, historical_data
 # Connect to the layout and callbacks of each tab
 from all_state_graph import all_state_graph_layout
 from by_state_graph import by_state_graph_layout
+from map import map_layout
 # from trends import trends_layout
 # from other import other_layout
 
@@ -20,7 +21,7 @@ app_tabs = html.Div(
             [
                 dbc.Tab(label="Overview", tab_id="tab-all_state_graph", labelClassName="text-success font-weight-bold", activeLabelClassName="text-danger"),
                 dbc.Tab(label="By State", tab_id="tab-by_state_graph", labelClassName="text-success font-weight-bold", activeLabelClassName="text-danger"),
-                #dbc.Tab(label="Other", tab_id="tab-other", labelClassName="text-success font-weight-bold", activeLabelClassName="text-danger"),
+                dbc.Tab(label="Map", tab_id="tab-map", labelClassName="text-success font-weight-bold", activeLabelClassName="text-danger"),
             ],
             id="tabs",
             active_tab="tab-all_state_graph",
@@ -46,8 +47,8 @@ def switch_tab(tab_chosen):
         return all_state_graph_layout
     elif tab_chosen == "tab-by_state_graph":
         return by_state_graph_layout
-    # elif tab_chosen == "tab-other":
-    #     return other_layout
+    elif tab_chosen == "tab-map":
+        return map_layout
     return html.P("This shouldn't be displayed for now...")
 
 
