@@ -70,6 +70,8 @@ code = {'Alabama': 'AL',
 
 approval_by_state['State'] = approval_by_state['State'].map(code)
 
+approval_by_state = approval_by_state.rename(columns={'Fielding end':'Survey Date'})
+
     
 # Plotly Express
 fig = px.choropleth(approval_by_state,
@@ -79,7 +81,8 @@ fig = px.choropleth(approval_by_state,
             hover_name='State',
             locationmode='USA-states',
             labels={'Approval Rate by State'},
-            scope='usa')
+            scope='usa',
+            animation_frame="Survey Date")
 
 fig.add_scattergeo(
     locations=approval_by_state['State'],
@@ -88,7 +91,7 @@ fig.add_scattergeo(
     mode='text')
 
 fig.update_layout(
-title={'text':'Approval % by State',
+title={'text':'Biden Approval Rate by State',
     'xanchor':'center',
     'yanchor':'top',
     'x':0.5})

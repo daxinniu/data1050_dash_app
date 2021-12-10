@@ -12,6 +12,7 @@ from by_state_graph import by_state_graph_layout
 from Approval import Approval_US_layout
 from map import map_layout
 from concern import concern_US_layout
+from image import image_layout
 # from trends import trends_layout
 # from other import other_layout
 
@@ -26,7 +27,7 @@ app_tabs = html.Div(
                 dbc.Tab(label="Map", tab_id="tab-map", labelClassName="text-success font-weight-bold", activeLabelClassName="text-danger"),
                 dbc.Tab(label="Gov Admin Approval", tab_id="tab-approval", labelClassName="text-success font-weight-bold", activeLabelClassName="text-danger"),
                 dbc.Tab(label="Concern Level", tab_id="tab-concern", labelClassName="text-success font-weight-bold", activeLabelClassName="text-danger"),
-
+                dbc.Tab(label="About Us", tab_id="tab-about", labelClassName="text-success font-weight-bold", activeLabelClassName="text-danger"),
             ],
             id="tabs",
             active_tab="tab-all_state_graph",
@@ -59,6 +60,8 @@ def switch_tab(tab_chosen):
         return Approval_US_layout
     elif tab_chosen == 'tab-concern':
         return concern_US_layout
+    elif tab_chosen == 'tab-about':
+        return image_layout
     return html.P("This shouldn't be displayed for now...")
 
 
