@@ -28,7 +28,6 @@ Metrices = np.sort(['Date','Test Positivity Ratio','Test Positivity Ratio',
        'Vaccinations Initiated Ratio',
        'Vaccinations Completed Ratio'])
 
-
 by_state_graph_layout = html.Div([
     html.H4("State"),
     dcc.Dropdown(
